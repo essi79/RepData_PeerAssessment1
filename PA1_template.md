@@ -40,7 +40,7 @@ activityData$date<-as.Date(activityData$date)
 ###First, we calculate the total number of steps taken per day
 
 ```r
-stepsPerDay<-with(activityData, tapply(steps, date, sum))
+stepsPerDay<-with(activityData[!is.na(activityData$steps),], tapply(steps, date, sum))
 ```
 ###then we histogram the total number of steps taken per day
 
@@ -181,7 +181,7 @@ weekdayAverageStepsPerInterval<-with(NoNAActivityData[NoNAActivityData$dayType==
 weekendAverageStepsPerInterval<-with(NoNAActivityData[NoNAActivityData$dayType=="Weekend",], tapply(steps, interval, mean))
 par(mfrow=c(2,1),mar=c(2,3,1,1))
 plot(weekdayAverageStepsPerInterval,type="l",main="Weekday Average steps per interval")
-plot(weekdayAverageStepsPerInterval,type="l",main="Weekend Average steps per interval")
+plot(weekendAverageStepsPerInterval,type="l",main="Weekend Average steps per interval")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
